@@ -4,7 +4,7 @@ public class Venda{
     String datv;
     String prodv;
     String quantv;
-    int valu,valt;
+    Double valu,valt;
 
     public String getDatv() {
         return datv;
@@ -23,23 +23,17 @@ public class Venda{
     }
     public void setQuantv(String quantv) {
         this.quantv = quantv;
-    }
-    public Venda(String datv, String prodv, String quantv) {
-
-        this.datv = datv;
-        this.prodv = prodv;
-        this.quantv = quantv;
     }    
-    public int getValu() {
+    public Double getValu() {
         return valu;
     }
-    public void setValu(int valu) {
+    public void setValu(Double valu) {
         this.valu = valu;
     }
-    public int getValt() {
+    public Double getValt() {
         return valt;
     }
-    public void setValt(int valt) {
+    public void setValt(Double valt) {
         this.valt = valt;
     }
     @Override

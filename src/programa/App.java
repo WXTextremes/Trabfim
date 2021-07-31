@@ -25,9 +25,6 @@ import classe.Venda;
             System.out.println("5 – Realizar venda");
             System.out.println("0 - Sair");
             System.out.println("Escolha: ");
-            System.out.print("Opção: ");
-            
-
             opcao = in.nextInt();
             in.nextLine();
 
@@ -95,10 +92,14 @@ import classe.Venda;
                     voltarMenu(in);
                     continue;
                 }
+                System.out.println("informe a data");
+                String date = in.nextLine();
                 System.out.println("\nVENDAS POR PERÍODO:");
                 System.out.println("*********************");
+                System.out.printf("Emitido em %s\n", date);
                 for (Venda venda : vendas) {
                     System.out.println(venda);
+                    voltarMenu(in);
                 }
                 voltarMenu(in);
             }else if (opcao == 5){
@@ -111,32 +112,34 @@ import classe.Venda;
 
                 System.out.println("Informe o codigo do produto: ");
                 String cdo = in.nextLine();
-                Produto provend = null;
                 for (Produto produto : produtos) {
                     if (cdo.equals(produto.getCodigo())) {
-                        provend = produto;
-                        break;
                     }
-                    System.out.println("Informe a quantidade de itens que queira comprar: ");
-                        Double qt = in.nextDouble();
-                        Double v = provend.getValor();
-                        Double vt = qt * v;
-                    System.out.printf("O resultado de sua compra deu: %d", vt);
-                    System.out.print("Deseja efetuar a venda? ");
+                    
+                    System.out.printf("O resultado de sua compra deu: %s",produto.getValor());
+                    System.out.print("\nDeseja efetuar a venda? ");
                     String r = in.nextLine();
-                    if (r.equals("s")){
+                    if (r.equals("s") || r.equals("S")){
+                        Venda da = new Venda();
+                        System.out.print("Me informe a data da venda: ");
+                        da.setDatv(in.nextLine());
+                        da.setProdv(produto.getNome());
+                        da.setValu(produto.getValor());
+                        qtdVendidos ++;
                         produtos.remove(produto);
                         System.out.print("Compra efetuada com sucesso!");
-
-                    }else if (r.equals("n")) {
+                        voltarMenu(in);
+                        }else if (r.equals("n") || r.equals("N")) {
                         System.out.println("Cancelamento efetuado com sucesso!");
-
+                        voltarMenu(in);
                     }
 
 
                        
                 }
             }
+                
+            
         
         } while (opcao != 0);
 
