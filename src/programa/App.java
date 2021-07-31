@@ -11,6 +11,7 @@ import classe.Venda;
     public static void main(String[] args) throws InterruptedException, IOException {
         int opcao, qtdCadastrados = 0;
         int qtdVendidos = 0;
+        int vava = 0;
         List<Produto> produtos = new ArrayList<>();
         List<Venda> vendas = new ArrayList<>();
         Scanner in = new Scanner(System.in);
@@ -82,7 +83,9 @@ import classe.Venda;
                 System.out.println("\nPRODUTOS CADASTRADOS:");
                 System.out.println("***********************");
                 for (Produto produto : produtos) {
-                    System.out.println(produto);
+                    System.out.println(produto.getCodigo());
+                    System.out.println(produto.getNome());
+                    System.out.println(produto.getValor());
                 }
 
                 voltarMenu(in);
@@ -98,7 +101,10 @@ import classe.Venda;
                 System.out.println("*********************");
                 System.out.printf("Emitido em %s\n", date);
                 for (Venda venda : vendas) {
-                    System.out.println(venda);
+                    System.out.printf(" %s",venda.getDatv());
+                    System.out.printf(" %s",venda.getProdv());
+                    System.out.printf(" %s",venda.getQtvendi());
+                    System.out.printf(" %s", venda.getValu());
                     voltarMenu(in);
                 }
                 voltarMenu(in);
@@ -112,31 +118,46 @@ import classe.Venda;
 
                 System.out.println("Informe o codigo do produto: ");
                 String cdo = in.nextLine();
+                
+                Produto produtoEncontrado = null;
                 for (Produto produto : produtos) {
                     if (cdo.equals(produto.getCodigo())) {
+                        produtoEncontrado = produto;
+                    }if (produto.equals(null)) {
+                    System.out.println("produto não encontrado!");
+                    break;
                     }
-                    
-                    System.out.printf("O resultado de sua compra deu: %s",produto.getValor());
+                }    
+                    System.out.printf("O resultado de sua compra deu: %s",produtoEncontrado.getValor());
                     System.out.print("\nDeseja efetuar a venda? ");
                     String r = in.nextLine();
+                    
                     if (r.equals("s") || r.equals("S")){
                         Venda da = new Venda();
                         System.out.print("Me informe a data da venda: ");
                         da.setDatv(in.nextLine());
-                        da.setProdv(produto.getNome());
-                        da.setValu(produto.getValor());
+                        da.setProdv(produtoEncontrado.getNome());
+                        da.setValu(produtoEncontrado.getValor());
+                        vava ++;
+                        da.setQtvendi(vava);
+                        vendas.add(da);
+                        produtos.remove(produtoEncontrado);
+                        qtdCadastrados --;
                         qtdVendidos ++;
-                        produtos.remove(produto);
                         System.out.print("Compra efetuada com sucesso!");
                         voltarMenu(in);
                         }else if (r.equals("n") || r.equals("N")) {
                         System.out.println("Cancelamento efetuado com sucesso!");
                         voltarMenu(in);
+                    }else {
+                        System.out.println("Caractere errado!\n");
+                        System.out.println("Cancelamento efetuado");
+                        voltarMenu(in);
                     }
-
+                    
 
                        
-                }
+                
             }
                 
             

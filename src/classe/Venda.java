@@ -5,7 +5,7 @@ public class Venda{
     String prodv;
     String quantv;
     Double valu,valt;
-
+    int qtvendi;
     public String getDatv() {
         return datv;
     }
@@ -35,6 +35,12 @@ public class Venda{
     }
     public void setValt(Double valt) {
         this.valt = valt;
+    }    
+    public int getQtvendi() {
+        return qtvendi;
+    }
+    public void setQtvendi(int qtvendi) {
+        this.qtvendi = qtvendi;
     }
     @Override
     public String toString() {
